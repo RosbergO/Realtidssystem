@@ -14,10 +14,11 @@
 #include "TinyTimber.h"
 
 //Kan vara fel med PIN4 och PIN6 i selectPort !!!!!!!!!!!!
-void selectPort(PortWriter *self, int port) {
-	if(port == 4) {
+void writePort(PortWriter *self, int port) {
+	if(self->currentPort == 4) {
 		PORTE = (1 << PINE4);
-		} else if (port == 6) {
+	} 
+	else if (self->currentPort == 6) {
 		PORTE = (1 << PINE6);
 	}
 }

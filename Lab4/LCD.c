@@ -203,15 +203,24 @@ void printAt(long num, int pos) {
 	writeChar( num % 10 + '0', pp);
 }
 
+/*
+	2 or 5 is displayed above the selected pulsegen.
+*/
+void indicatePulseGen(int selected) {
+	if(selected == 0) {
+		LCDDR0 |= 0x40;
+		LCDDR1 &= 0xDF;
+	}
+	else {
+		LCDDR1 |= 0x20;
+		LCDDR0 &= 0xBF;
+	}
+}
+
 void updateLCD(LCD *self, int arg) {
 	printAt(self->pulseGenerator[0]->frequency, 0);
 	printAt(self->pulseGenerator[1]->frequency, 4);
-}
-
-/*
-int main() {
-	LCD_Init();
-	long a = 169;
-	printAt(a, 1);
-}
-*/
+	indicatePulseGen(arg);
+	
+	
+	}

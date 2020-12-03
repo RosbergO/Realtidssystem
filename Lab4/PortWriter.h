@@ -13,12 +13,12 @@
 
 typedef struct {
 	Object super;
-	int currentPulse;
+	int currentPort;
 } PortWriter;
 
-void selectPort(PortWriter *self, int arg);
+void writePort(PortWriter *self, int arg);
 
-#define initPort() {initObject(), 0}
+#define initPort() {initObject(), 4}
 
 
 

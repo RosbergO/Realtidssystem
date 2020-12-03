@@ -28,6 +28,7 @@ struct numbers getChar(char ch);
 void writeChar(char ch, int pos);
 void LCD_Init();
 void printAt(long num, int pos);
+void indicatePulseGen(int selected);
 
 #define initLCD(pulseGen1, pulseGen2) {initObject(), {pulseGen1, pulseGen2}}
 

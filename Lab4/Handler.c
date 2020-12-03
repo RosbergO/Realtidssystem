@@ -15,31 +15,29 @@
 
 
 
-void initHandlers(Handler *self) {
-	long x = 3;
-	SYNC(self->lcd, LCD_Init, 0);
-	//SYNC(self->lcd, printTest, );
-}
-
 void joystickPINB(Handler *self, int arg) {
-	if (((PINB >> 6) & 1) == 0) {
-		ASYNC(self->pulseGenerator[self->selected], increaseFrequency, 0);
+	self->joystick->held = 1;
+	if ((((PINB >> 6) & 1) == 0) && (self->joystick->held == 1)) {
+		ASYNC(self->joystick, isHeld, self->selected);
 	}
-	else if(((PINB >> 7) & 1) == 0) {
-		ASYNC(self->pulseGenerator[self->selected], decreaseFrequency, 0);
+	else if(((PINB >> 7) & 1) == 0 && (self->joystick->held == 1)) {
+		ASYNC(self->joystick, isHeld, self->selected);
 	}
 	else if(((PINB >> 4) & 1) == 0) {
 		ASYNC(self->pulseGenerator[self->selected], saveFrequency, 0);
 	}
-	ASYNC(self->lcd, updateLCD, 0);
+	ASYNC(self->lcd, updateLCD, self->selected);
+	ASYNC(self->portWriter, writePort, self->pulseGenerator[self->selected]->frequency); //Dubbelcheck
 }
 
 void joystickPINE(Handler *self, int arg) {
 	if(((PINE >> 3) & 1) && (self->selected == 0)) {
 		self->selected = 1;
+		self->portWriter->currentPort = 6; //Dubbelchecka pls
 	}
 	else if(((PINE >> 2) & 1) && (self->selected == 1)) {
 		self->selected = 0;
+		self->portWriter->currentPort = 4;
 	}
-	
+	ASYNC(self->lcd, updateLCD, self->selected);
 }

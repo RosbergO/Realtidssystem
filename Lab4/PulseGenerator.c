@@ -13,19 +13,19 @@
 #include "TinyTimber.h"
 
 
-void increaseFrequency(PulseGenerator *self) {
+void increaseFrequency(PulseGenerator *self, int arg) {
 	if (self->frequency < 99) {
 		self->frequency += 1;
 	}
 }
 
-void decreaseFrequency(PulseGenerator *self) {
+void decreaseFrequency(PulseGenerator *self, int arg) {
 	if (self->frequency > 0) {
 		self->frequency -= 1;
 	}
 }
 	
-void saveFrequency(PulseGenerator *self) {
+void saveFrequency(PulseGenerator *self, int arg) {
 	if (self->frequency > 0) {
 		self->savedFrequency = self->frequency;
 		self->frequency = 0;

@@ -17,9 +17,9 @@ typedef struct {
 	PortWriter *port;
 } PulseGenerator;
 
-void increaseFrequency(PulseGenerator *self);
-void decreaseFrequency(PulseGenerator *self);
-void saveFrequency(PulseGenerator *self);
+void increaseFrequency(PulseGenerator *self, int arg);
+void decreaseFrequency(PulseGenerator *self, int arg);
+void saveFrequency(PulseGenerator *self, int arg);
 
 #define initPulseGenerator(pos, port){initObject(), 0, 0, pos, port};
 
