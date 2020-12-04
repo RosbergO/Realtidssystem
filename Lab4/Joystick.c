@@ -10,12 +10,12 @@ void isHeld(Joystick *self, int arg) {
 	if (((PINB >> 6) & 1) == 0) {
 		self->held = 1;
 		ASYNC(self->lcd->pulseGenerator[arg], increaseFrequency, 0);
-		AFTER(MSEC(100), self, isHeld, arg);
+		AFTER(MSEC(200), self, isHeld, arg);
 	}
 	else if(((PINB >> 7) & 1) == 0) {
 		self->held = 1;
 		ASYNC(self->lcd->pulseGenerator[arg], decreaseFrequency, 0);
-		AFTER(MSEC(100), self, isHeld, arg);
+		AFTER(MSEC(200), self, isHeld, arg);
 	}
 	else {
 		self->held = 0;

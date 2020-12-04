@@ -152,7 +152,7 @@ void writeChar(char ch, int pos){
     }
 }
 
-void LCD_Init() {
+void LCD_Init(LCD *self, int arg) {
 	/*
 	//LCD init
 	CLKPR = 0x80;
@@ -211,7 +211,7 @@ void indicatePulseGen(int selected) {
 		LCDDR0 |= 0x40;
 		LCDDR1 &= 0xDF;
 	}
-	else {
+	else if(selected == 1){
 		LCDDR1 |= 0x20;
 		LCDDR0 &= 0xBF;
 	}
@@ -221,6 +221,4 @@ void updateLCD(LCD *self, int arg) {
 	printAt(self->pulseGenerator[0]->frequency, 0);
 	printAt(self->pulseGenerator[1]->frequency, 4);
 	indicatePulseGen(arg);
-	
-	
 	}

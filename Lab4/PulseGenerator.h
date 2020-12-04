@@ -13,14 +13,15 @@ typedef struct {
 	Object super;
 	int frequency;
 	int savedFrequency;
-	int position;
+	int portNumber;
 	PortWriter *port;
 } PulseGenerator;
 
 void increaseFrequency(PulseGenerator *self, int arg);
 void decreaseFrequency(PulseGenerator *self, int arg);
 void saveFrequency(PulseGenerator *self, int arg);
+void freqWriter(PulseGenerator *self, int arg);
 
-#define initPulseGenerator(pos, port){initObject(), 0, 0, pos, port};
+#define initPulseGenerator(portNumber, port){initObject(), 0, 0, portNumber, port};
 
 #endif /* PULSEGENERATOR_H_ */
