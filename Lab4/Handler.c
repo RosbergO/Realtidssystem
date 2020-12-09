@@ -14,6 +14,11 @@
 #include "TinyTimber.h"
 
 
+void initPulseWrite(Handler *self, int arg) {
+	SYNC(self->lcd, LCD_Init, 0);
+	ASYNC(self->pulseGenerator[1], freqWriter, 0);
+	ASYNC(self->pulseGenerator[0], freqWriter, 0);
+}
 
 void joystickPINB(Handler *self, int arg) {
 	self->joystick->held = 1;
@@ -27,17 +32,17 @@ void joystickPINB(Handler *self, int arg) {
 		ASYNC(self->pulseGenerator[self->selected], saveFrequency, 0);
 	}
 	ASYNC(self->lcd, updateLCD, self->selected);
-	ASYNC(self->portWriter, writePort, self->pulseGenerator[self->selected]->frequency); //Dubbelcheck
+	//AFTER((MSEC(2000)/self->pulseGenerator[self->selected]->frequency),self->portWriter, writePort, self->pulseGenerator[self->selected]->frequency); //Dubbelcheck
 }
 
 void joystickPINE(Handler *self, int arg) {
 	if(((PINE >> 3) & 1) && (self->selected == 0)) {
 		self->selected = 1;
-		self->portWriter->currentPort = 6; //Dubbelchecka pls
+		//self->portWriter->currentPort = 6; //Dubbelchecka pls
 	}
 	else if(((PINE >> 2) & 1) && (self->selected == 1)) {
 		self->selected = 0;
-		self->portWriter->currentPort = 4;
+		//self->portWriter->currentPort = 4;
 	}
 	ASYNC(self->lcd, updateLCD, self->selected);
 }

@@ -34,3 +34,13 @@ void saveFrequency(PulseGenerator *self, int arg) {
 		self->frequency = self->savedFrequency;
 	}
 }
+
+void freqWriter(PulseGenerator *self, int arg) {
+	if(self->frequency == 0) {
+		AFTER(MSEC(200), self, freqWriter, 0);
+	}
+	if((self->frequency) > 0) {
+		ASYNC(self->port, writePort, self->portNumber);
+		AFTER((MSEC(3000)/self->frequency), self, freqWriter, 0);
+	}
+}

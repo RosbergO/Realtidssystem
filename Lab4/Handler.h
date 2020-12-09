@@ -25,6 +25,7 @@ typedef struct {
 
 void joystickPINB(Handler *self, int arg);
 void joystickPINE(Handler *self, int arg);
+void initPulseWrite(Handler *self, int arg);
 #define initHandler(pulseGen1, pulseGen2, lcd, joystick, portWriter) {initObject(), {pulseGen1, pulseGen2}, lcd, 0, joystick, portWriter}
 //#define initHandler(pulseGen1, pulseGen2, lcd, joystick) {initObject(), {pulseGen1, pulseGen2}, lcd, 0, joystick}
 

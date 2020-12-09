@@ -20,25 +20,20 @@
 
 PortWriter port = initPort();
 PulseGenerator pulseGen1 = initPulseGenerator(4, &port);
-PulseGenerator pulseGen2 = initPulseGenerator(3, &port);
+PulseGenerator pulseGen2 = initPulseGenerator(6, &port);
 LCD lcd = initLCD(&pulseGen1, &pulseGen2);
 Joystick joystick = initJoystick(&lcd);
 Handler handler = initHandler(&pulseGen1, &pulseGen2, &lcd, &joystick, &port);
-//Handler handler = initHandler(&pulseGen1, &pulseGen2, &lcd);
-
-NÄSTA STEG ÄR SKRIVA UT PULSEN!!!!!!!
 
 
 int main(void)
-{
-	
+{	
 	/*
 		IRQPCINT0 - Left & Right
 		IRQPCINT1 - Up, down & depressed
 	*/
-	LCD_Init();
 	INSTALL(&handler, joystickPINB, IRQ_PCINT1);
 	INSTALL(&handler, joystickPINE, IRQ_PCINT0);
-	return TINYTIMBER(&lcd, updateLCD, 0);
+	return TINYTIMBER(&handler, initPulseWrite, 0);
 }
 

@@ -26,7 +26,7 @@ void printTest(LCD *self, int num);
 void writeLong(long i);
 struct numbers getChar(char ch);
 void writeChar(char ch, int pos);
-void LCD_Init();
+void LCD_Init(LCD *self, int arg);
 void printAt(long num, int pos);
 void indicatePulseGen(int selected);
 
