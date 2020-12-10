@@ -19,6 +19,7 @@ typedef struct {
 		Bridge *bridge;
 		OutputHandler *outputHandler;
 		int lightStatus;
+		int count;
 		bool southWasOn;
 	} TrafficLight;
 
@@ -27,6 +28,6 @@ void changeLights(TrafficLight *self, int arg);
 
 
 
-#define initTrafficLight(carQueue, bridge, outputHandler) {initObject(), carQueue, bridge, outputHandler, 0, 0, 0}
+#define initTrafficLight(carQueue, bridge, outputHandler) {initObject(), carQueue, bridge, outputHandler, 0, 0, 1, 0}
 
 #endif /* TRAFFICLIGHT_H_ */

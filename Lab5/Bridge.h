@@ -14,7 +14,7 @@ typedef struct {
 	Object super;
 	CarQueue *carQueue;
 	int northboundEntry;
-	int southBoundEntry;
+	int southboundEntry;
 	} Bridge;
 
 void enteredBridge(Bridge *self, int arg);
