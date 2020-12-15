@@ -1,0 +1,1 @@
+/usr/bin/cc  -pthread -g   CMakeFiles/Lab5Sim.dir/main.c.o CMakeFiles/Lab5Sim.dir/SerialPort.c.o CMakeFiles/Lab5Sim.dir/UserInput.c.o CMakeFiles/Lab5Sim.dir/GUI.c.o CMakeFiles/Lab5Sim.dir/Simulator.c.o  -o Lab5Sim 

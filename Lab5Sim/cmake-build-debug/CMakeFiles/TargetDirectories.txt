@@ -1,0 +1,3 @@
+/home/oscar/CLionProjects/D0003E/Lab5Sim/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/oscar/CLionProjects/D0003E/Lab5Sim/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/oscar/CLionProjects/D0003E/Lab5Sim/cmake-build-debug/CMakeFiles/Lab5Sim.dir
