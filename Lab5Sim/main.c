@@ -28,7 +28,7 @@ pthread_t GUI;
 pthread_t simulator;
 
 int northGreenLight = 0;
-int southGreenLight = 1;
+int southGreenLight = 0;
 int bothRedLight = 0; //neccessary???
 int northboundQueue = 0;
 int southboundQueue = 0;
@@ -36,15 +36,17 @@ int onBridge = 0;
 
 
 int main(void) {
-    //openSerialPort();
+    openSerialPort();
     //readUserInput(NULL);
     pthread_create(&simulator, NULL, enterBridge, NULL);
     pthread_create(&GUI, NULL, printAll, NULL);
     pthread_create(&userInput, NULL, readUserInput, NULL);
+    pthread_create(&controllerInput, NULL, readFromController, NULL);
     pthread_detach(GUI);
     pthread_detach(simulator);
     pthread_detach(userInput);
-    //pthread_create(&controllerInput, NULL, readFromController, NULL);
+    pthread_detach(controllerInput);
+    
     while(1) {
 
     }

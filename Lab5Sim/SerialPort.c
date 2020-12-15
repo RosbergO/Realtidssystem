@@ -4,9 +4,7 @@
 #include "SerialPort.h"
 #include "Shared.h"
 int COM1;
-int northGreenLight;
-int southGreenLight;
-int bothRedLight; //neccessary???
+int bothRedLight; 
 
 void openSerialPort(void) {
     struct termios config;
@@ -46,7 +44,7 @@ void writeToController(uint8_t instr){ //Register is 8 bit
 void *readFromController(void *a) {
     uint8_t inData;
     while(1) {
-        uint8_t data = read(COM1, &inData, sizeof(inData)); //(returns -1 if empty)
+        int data = read(COM1, &inData, sizeof(inData)); //(returns -1 if empty)
         if(data > 0){
             if(inData == 0x9) {
                 northGreenLight = 1;
@@ -59,7 +57,7 @@ void *readFromController(void *a) {
             else if(inData == 0xA) {
                 northGreenLight = 0;
                 southGreenLight = 0;
-                bothRedLight = 0;
+                bothRedLight = 1;
             }
         }
     }

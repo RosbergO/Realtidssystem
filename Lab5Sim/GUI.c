@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include "GUI.h"
 #include "Shared.h"
-#include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -28,21 +27,22 @@ void *printAll(void *a) {
         printf("Cars on bridge: %d \n", onBridge);
         printf("Cars in northbound queue: %d \n", northboundQueue);
         printf("Cars in southbound queue: %d \n", southboundQueue);
-        printLight();
-        usleep(200000);
+        printf("South light %d nort light %d both red %d \n", southGreenLight, northGreenLight, bothRedLight);
+        //printLight();
+        usleep(500000);
     }
 
 }
 
 void printLight(void) {
     if(northGreenLight) {
-        printf("Northbound light green\nSouthbound light red\n");
+        printf("Northbound light green - Southbound light red\n");
     }
     else if(southGreenLight) {
-        printf("Southbound light green\nNorthbound light red\n");
+        printf("Southbound light green - Northbound light red\n");
     }
     else if(bothRedLight) {
-        printf("Southbound light red\nNorthbound light red\n");
+        printf("Southbound light red - Northbound light red\n");
     }
 }
 
