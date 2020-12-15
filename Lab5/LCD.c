@@ -7,6 +7,14 @@
 
 #include "LCD.h"
 #include "TinyTimber.h"
+#include <avr/interrupt.h>
+#include <avr/io.h>
+#include <ctype.h>
+
+
+#define FOSC 8000000UL
+#define BAUD 9600
+#define MYUBRR (((FOSC / (BAUD * 16UL))) - 1)
 
 // Struct used to return multiple values in getChar
 struct numbers {
@@ -168,6 +176,10 @@ void LCD_Init() {
 	PCMSK1 = 1 << PCINT15;
 	EIMSK = 1 << PCIE1;
 	*/
+	
+	
+	
+	/*
 		CLKPR = 0x80;
 		CLKPR = 0x00;
 		
@@ -192,6 +204,32 @@ void LCD_Init() {
 		UBRR0H = (UBRR0 >> 8);
 		UBRR0L = UBRR0;
 		UCSR0B = (1<<RXEN0)|(1<<TXEN0);
+		*/
+	
+	
+	
+	
+		//Clock prescaler
+		CLKPR = 0x80;
+		CLKPR = 0x00;
+		
+		//LCD
+		LCDCRA = 0xC0;			//LCD ENABLE and LOW POWER WAVEFORM
+		LCDCRB = 0xB7;			//AsyncClock, 1/3 Bias, 1/4 Duty, 25 Segments
+		LCDFRR = 0x07;			//LCD Clock Divide 32 Hz
+		LCDCCR = 0x0F;			//3.35 Volt
+		TCCR1B = 0x0D;			//Clock prescaler set to 1024 and CFC.
+		
+		//INTERRUPT
+		EIFR = 0xC0;			//Interrupt request
+		EIMSK = 0xC0;			//Cause an interrupt
+		
+		//USART
+		UBRR0H = MYUBRR >> 8;
+		UBRR0L = MYUBRR;
+		UCSR0B = (1<<RXCIE0)|(1<<RXEN0)|(1<<TXEN0);
+		UCSR0C = (1<<USBS0)|(1<<UCSZ01)|(1<<UCSZ00);
+
 		
 }
 
@@ -224,9 +262,13 @@ void indicatePulseGen(int selected) {
 }
 
 void updateLCD(LCD *self, int arg) {
-	printAt(self->pulseGenerator[0]->frequency, 0);
-	printAt(self->pulseGenerator[1]->frequency, 4);
-	indicatePulseGen(arg);
-	
-	
-	}
+	printAt(arg, 0);
+}
+
+void updateTrafficLights(LCD *self, int arg) {
+	printAt(arg, 4);
+}
+
+void updateOutput(LCD *self, int arg) {
+	printAt(arg, 2);
+}

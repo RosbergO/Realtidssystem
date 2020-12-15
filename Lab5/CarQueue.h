@@ -17,8 +17,8 @@ typedef struct {
 	} CarQueue;
 
 
-void incrementQueue(TrafficLight *self, int arg);
-void decrementQueue(TrafficLight *self, int arg);
+void incrementQueue(CarQueue *self, int arg);
+void decrementQueue(CarQueue *self, int arg);
 
 #define initCarQueue() {initObject(), 0, 0}
 

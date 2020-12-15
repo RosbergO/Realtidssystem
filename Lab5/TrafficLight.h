@@ -6,15 +6,17 @@
  */ 
 
 #include "TinyTimber.h"
-#include "InputHandler.h"
 #include "CarQueue.h"
 #include "Bridge.h"
 #include "OutputHandler.h"
+#include "LCD.h"
+#include <stdbool.h>
 #ifndef TRAFFICLIGHT_H_
 #define TRAFFICLIGHT_H_
 
 typedef struct {
 		Object super;
+		LCD *lcd;
 		CarQueue *carQueue;
 		Bridge *bridge;
 		OutputHandler *outputHandler;
@@ -24,10 +26,10 @@ typedef struct {
 	} TrafficLight;
 
 void changeLights(TrafficLight *self, int arg);
+//void swapDirection(TrafficLight *self, int arg);
 
 
 
-
-#define initTrafficLight(carQueue, bridge, outputHandler) {initObject(), carQueue, bridge, outputHandler, 0, 0, 1, 0}
+#define initTrafficLight(lcd, carQueue, bridge, outputHandler) {initObject(), lcd, carQueue, bridge, outputHandler, 0, 0xA, 0, 0}
 
 #endif /* TRAFFICLIGHT_H_ */

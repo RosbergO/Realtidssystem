@@ -7,10 +7,10 @@
 
 #include "CarQueue.h"
 
-#define NorthboundCarArrival = 0
-#define NorthboundBridgeEntry = 1
-#define SouthboundCarArrival = 2
-#define SouthboundBridgeEntry = 3
+#define NorthboundCarArrival 1
+#define NorthboundBridgeEntry 2
+#define SouthboundCarArrival 3
+#define SouthboundBridgeEntry 4
 
 void incrementQueue(CarQueue *self, int direction) {
 	if(direction == NorthboundCarArrival) {
@@ -19,7 +19,6 @@ void incrementQueue(CarQueue *self, int direction) {
 	else if(direction == SouthboundCarArrival) {
 		self->southQueue++;
 	}
-int hello;
 }
 void decrementQueue(CarQueue *self, int direction) {
 	if(direction == NorthboundBridgeEntry && self->northQueue > 0) {
